@@ -24,7 +24,7 @@ function func_num_args () {}
  * The argument offset. Function arguments are counted starting from
  * zero.
  * </p>
- * @return mixed the specified argument, or false on error.
+ * @return mixed|false the specified argument, or false on error.
  */
 function func_get_arg ($arg_num) {}
 
@@ -117,9 +117,42 @@ function strcasecmp ($str1, $str2) {}
 function strncasecmp ($str1, $str2, $len) {}
 
 /**
+ * The function returns {@see true} if the passed $haystack starts from the
+ * $needle string or {@see false} otherwise.
+ *
+ * @param string $haystack
+ * @param string $needle
+ * @return bool
+ * @since 8.0
+ */
+function str_starts_with(string $haystack, string $needle) : bool {}
+
+/**
+ * The function returns {@see true} if the passed $haystack ends with the
+ * $needle string or {@see false} otherwise.
+ *
+ * @param string $haystack
+ * @param string $needle
+ * @return bool
+ * @since 8.0
+ */
+function str_ends_with(string $haystack, string $needle) : bool {}
+
+/**
+ * Checks if $needle is found in $haystack and returns a boolean value
+ * (true/false) whether or not the $needle was found.
+ *
+ * @param string $haystack
+ * @param string $needle
+ * @return bool
+ * @since 8.0
+ */
+function str_contains(string $haystack, string $needle) : bool {}
+
+/**
  * Return the current key and value pair from an array and advance the array cursor
  * @link https://php.net/manual/en/function.each.php
- * @param array|ArrayObject $array <p>
+ * @param array|ArrayObject &$array <p>
  * The input array.
  * </p>
  * @return array the current key and value pair from the array
@@ -135,6 +168,7 @@ function strncasecmp ($str1, $str2, $len) {}
  * array contents, <b>each</b> returns
  * false.
  * @deprecated 7.2 Use a foreach loop instead.
+ * @removed 8.0
  */
 function each (array &$array) {}
 
@@ -386,7 +420,7 @@ function trait_exists($traitname, $autoload ) {}
  * The class name. The name is matched in a case-insensitive manner.
  * </p>
  * @param bool $autoload [optional] <p>
- * Whether or not to call &link.autoload; by default.
+ * Whether or not to call autoload by default.
  * </p>
  * @return bool true if <i>class_name</i> is a defined class,
  * false otherwise.
@@ -400,7 +434,7 @@ function class_exists ($class_name, $autoload = true) {}
  * The interface name
  * </p>
  * @param bool $autoload [optional] <p>
- * Whether to call &link.autoload; or not by default.
+ * Whether to call autoload or not by default.
  * </p>
  * @return bool true if the interface given by
  * <i>interface_name</i> has been defined, false otherwise.
@@ -431,7 +465,7 @@ function function_exists ($function_name) {}
  * @param bool $autoload [optional] Whether to autoload if the original class is not found.
  * @return bool true on success or false on failure.
  */
-function class_alias ($original, $alias, $autoload = TRUE) {}
+function class_alias ($original, $alias, $autoload = true) {}
 
 /**
  * Returns an array with the names of included or required files
@@ -473,7 +507,7 @@ function get_required_files () {}
  * belongs to a class which is a subclass of
  * <i>class_name</i>, false otherwise.
  */
-function is_subclass_of ($object, $class_name, $allow_string = TRUE) {}
+function is_subclass_of ($object, $class_name, $allow_string = true) {}
 
 /**
  * Checks if the object is of this class or has this class as one of its parents
@@ -491,7 +525,7 @@ function is_subclass_of ($object, $class_name, $allow_string = TRUE) {}
  * @return bool <b>TRUE</b> if the object is of this class or has this class as one of
  * its parents, <b>FALSE</b> otherwise.
  */
-function is_a ($object, $class_name, $allow_string = FALSE) {}
+function is_a ($object, $class_name, $allow_string = false) {}
 
 /**
  * Get the default properties of the class
@@ -551,6 +585,8 @@ function trigger_error ($error_msg, $error_type = E_USER_NOTICE) {}
  * @link https://php.net/manual/en/function.user-error.php
  * @param string $message
  * @param int    $error_type [optional]
+ * @return bool This function returns false if wrong <i>error_type</i> is
+ * specified, true otherwise.
  */
 function user_error ($message, $error_type = E_USER_NOTICE) {}
 
@@ -662,7 +698,7 @@ function get_declared_traits() {}
  * the user defined ones using $arr["user"] (see example
  * below).
  */
-function get_defined_functions ($exclude_disabled = FALSE) {}
+function get_defined_functions ($exclude_disabled = false) {}
 
 /**
  * Returns an array of all defined variables
@@ -680,8 +716,9 @@ function get_defined_vars () {}
  * @param string $code <p>
  * The function code.
  * </p>
- * @return string a unique function name as a string, or false on error.
+ * @return string|false a unique function name as a string, or false on error.
  * @deprecated 7.2 Use anonymous functions instead.
+ * @removed 8.0
  */
 function create_function ($args, $code) {}
 
@@ -756,7 +793,7 @@ function extension_loaded ($name) {}
  * <p>
  * This parameter must be in lowercase.
  * </p>
- * @return array an array with all the functions, or false if
+ * @return string[]|false an array with all the functions, or false if
  * <i>module_name</i> is not a valid extension.
  */
 function get_extension_funcs ($module_name) {}

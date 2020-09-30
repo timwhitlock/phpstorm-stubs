@@ -160,6 +160,7 @@ function hebrev ($hebrew_text, $max_chars_per_line = null) {}
  * </p>
  * @return string the visual string.
  * @deprecated 7.4
+ * @removed 8.0
  */
 function hebrevc ($hebrew_text, $max_chars_per_line = null) {}
 
@@ -447,11 +448,12 @@ function strcoll ($str1, $str2) {}
  * @param float $number <p>
  * The number to be formatted.
  * </p>
- * @return string the formatted string. Characters before and after the formatting
+ * @return string|null the formatted string. Characters before and after the formatting
  * string will be returned unchanged.
- * Non-numeric number causes returning &null; and
+ * Non-numeric number causes returning null and
  * emitting E_WARNING.
  * @deprecated 7.4
+ * @removed 8.0
  */
 function money_format ($format, $number) {}
 
@@ -505,7 +507,7 @@ function money_format ($format, $number) {}
  * </p>
  * <p>
  * If length is given and is 0,
- * false or &null; an empty string will be returned.
+ * false or null an empty string will be returned.
  * </p>
  * Using a negative length:
  * <pre>
@@ -734,7 +736,7 @@ function rtrim ($str, $charlist = " \t\n\r\0\x0B") {}
  * subject, and the return value is an array as
  * well.
  * </p>
- * @param int $count [optional] If passed, this will hold the number of matched and replaced needles.
+ * @param int &$count [optional] If passed, this will hold the number of matched and replaced needles.
  * @return string|string[] This function returns a string or an array with the replaced values.
  */
 function str_replace ($search, $replace, $subject, &$count = null) {}
@@ -754,7 +756,7 @@ function str_replace ($search, $replace, $subject, &$count = null) {}
  * subject, and the return value is an array as
  * well.
  * </p>
- * @param int $count [optional] <p>
+ * @param int &$count [optional] <p>
  * The number of matched and replaced needles will
  * be returned in count which is passed by
  * reference.
@@ -818,7 +820,7 @@ function count_chars ($string, $mode = null) {}
  * </p>
  * @return string the chunked string.
  */
-function chunk_split ($body, $chunklen = null, $end = null) {}
+function chunk_split ($body, $chunklen = 76, $end = "\r\n") {}
 
 /**
  * Strip whitespace (or other characters) from the beginning and end of a string
@@ -873,9 +875,10 @@ function ltrim ($str, $charlist = " \t\n\r\0\x0B") {}
  * @param string $str <p>
  * The input string.
  * </p>
- * @param string $allowable_tags [optional] <p>
+ * @param array|string $allowable_tags [optional] <p>
  * You can use the optional second parameter to specify tags which should
- * not be stripped.
+ * not be stripped.<br/>
+ * Since 7.4.0 alternatively accepts an array of allowed tags.
  * </p>
  * <p>
  * HTML comments and PHP tags are also stripped. This is hardcoded and
@@ -894,7 +897,7 @@ function strip_tags ($str, $allowable_tags = null) {}
  * @param string $second <p>
  * The second string.
  * </p>
- * @param float $percent [optional] <p>
+ * @param float &$percent [optional] <p>
  * By passing a reference as third argument,
  * similar_text will calculate the similarity in
  * percent for you.
@@ -1004,7 +1007,7 @@ function join ($glue = "", $pieces) {}
  * </li>
  * </ul>
  * @param string|array $locale <p>
- * If locale is &null; or the empty string
+ * If locale is null or the empty string
  * "", the locale names will be set from the
  * values of environment variables with the same names as the above
  * categories, or from "LANG".
@@ -1020,7 +1023,7 @@ function join ($glue = "", $pieces) {}
  * different names on different systems or for providing a fallback
  * for a possibly not available locale.
  * </p>
- * @param string $_ [optional]
+ * @param string ...$_ [optional]
  * @return string|false the new current locale, or false if the locale functionality is
  * not implemented on your platform, the specified locale does not exist or
  * the category name is invalid.
@@ -1036,7 +1039,7 @@ function join ($glue = "", $pieces) {}
  * on the system that PHP is running. It returns exactly
  * what the system setlocale function returns.
  */
-function setlocale ($category, $locale, $_ = null) {}
+function setlocale ($category, $locale, ...$_) {}
 
 /**
  * Get numeric formatting information

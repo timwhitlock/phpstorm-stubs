@@ -352,14 +352,49 @@ namespace MongoDB {}
              * @link https://php.net/manual/en/mongodb-driver-server.executequery.php
              * @param string $namespace A fully qualified namespace (e.g. "databaseName.collectionName").
              * @param Query $query The MongoDB\Driver\Query to execute.
-             * @param array|ReadPreference $options The third parameter is now an options array. For backwards compatibility, this parameter will still accept a MongoDB\Driver\ReadPreference object.
+             * @param array|ReadPreference $options
+             * <table>
+             * <caption><strong>options</strong></caption>
+             *
+             * <thead>
+             * <tr>
+             * <th>Option</th>
+             * <th>Type</th>
+             * <th>Description</th>
+             * </tr>
+             *
+             * </thead>
+             *
+             * <tbody>
+             *
+             * <tr>
+             * <td>readPreference</td>
+             * <td><a href="https://php.net/manual/en/php.neclass.mongodb-driver-readpreference.php">MongoDB\Driver\ReadPreference</a></td>
+             * <td>
+             * <p>
+             * A read preference to use for selecting a server for the operation.
+             * </p>
+             * </td>
+             * </tr>
+             * <tr>
+             * <td>session</td>
+             * <td><a href="https://php.net/manual/en/class.mongodb-driver-session.php">MongoDB\Driver\Session</a></td>
+             * <td>
+             * <p>
+             * A session to associate with the operation.
+             * </p>
+             * </td>
+             * </tr>
+             * </tbody>
+             * </table>
+             * The third parameter is now an options array. For backwards compatibility, this parameter will still accept a MongoDB\Driver\ReadPreference object.
              * @throws InvalidArgumentException on argument parsing errors.
              * @throws ConnectionException if connection to the server fails (for reasons other than authentication).
              * @throws AuthenticationException if authentication is needed and fails.
              * @throws RuntimeException on other errors (e.g. invalid command, issuing a write command to a secondary).
              * @return Cursor
              */
-            final public function executeQuery($namespace, Query $query, array $option = [])
+            final public function executeQuery($namespace, Query $query, $option = [])
             {
             }
 
